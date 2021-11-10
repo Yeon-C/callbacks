@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2 style="text-align: center; font-size: 60px">Async Example</h2>
+
+    <p id="Garfield"></p>
+
+    <script>
+      function myDisplayer(some) {
+        document.getElementById("Garfield").innerHTML = some;
+      }
+
+      function getFile(myCallback) {
+        let ajax = new XMLHttpRequest();
+        ajax.open("GET", "Lasagna.html");
+        ajax.onload = function () {
+          if (ajax.status == 200) {
+            myCallback(this.responseText);
+          } else if (ajax.status == 400) {
+            console.log("There was an error 400");
+          } else {
+            console.log("something else other than 200 was returned");
+          }
+        };
+        ajax.send();
+      }
+
+      getFile(myDisplayer);
+    </script>
+  </body>
+</html>
